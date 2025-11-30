@@ -1,6 +1,8 @@
 export type ResumeBreakdownDetails = {
   skills?: string[];
   experience?: string[];
+  education?: string[];
+  summary?: string;
 };
 
 export type MatchInsights = {
@@ -8,6 +10,7 @@ export type MatchInsights = {
   strengths: string[];
   gaps: string[];
   insights: string[];
+  experienceHighlight?: string;
   breakdown?: ResumeBreakdownDetails;
 };
 

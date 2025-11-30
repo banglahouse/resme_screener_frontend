@@ -24,7 +24,8 @@ type Action =
   | { type: 'setChats'; payload: { items: ChatMessage[]; total: number } }
   | { type: 'chatLoading' }
   | { type: 'appendChat'; payload: ChatMessage }
-  | { type: 'chatError'; payload: ApiError };
+  | { type: 'chatError'; payload: ApiError }
+  | { type: 'reset' };
 
 const initialState: ApplicationState = {
   status: 'idle',
@@ -56,6 +57,8 @@ function reducer(state: ApplicationState, action: Action): ApplicationState {
       };
     case 'chatError':
       return { ...state, chats: { ...state.chats, loading: false, error: action.payload } };
+    case 'reset':
+      return { status: 'idle', chats: { loading: false, items: [], total: 0 } };
     default:
       return state;
   }
@@ -129,9 +132,13 @@ function useApplicationController() {
     }
   }, []);
 
+  const resetApplication = useCallback(() => {
+    dispatch({ type: 'reset' });
+  }, []);
+
   return useMemo(
-    () => ({ state, submitApplication, loadApplicationById, sendMessage, loadChats }),
-    [state, submitApplication, loadApplicationById, sendMessage, loadChats]
+    () => ({ state, submitApplication, loadApplicationById, sendMessage, loadChats, resetApplication }),
+    [state, submitApplication, loadApplicationById, sendMessage, loadChats, resetApplication]
   );
 }
 

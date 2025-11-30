@@ -18,6 +18,7 @@ const demoApplication: Application = {
       'Education: MS Computer Science, State University',
       'Summary: Strong fit for backend leadership roles',
     ],
+    experienceHighlight: '4+ years of experience across Client Relationship Management, Renewals & Upsell / Cross-sell, Proposal Preparation & Negotiations.',
     breakdown: {
       skills: ['Node.js', 'TypeScript', 'PostgreSQL', 'AWS'],
       experience: ['Led platform squad of 8 engineers', 'Architected ML data pipelines'],

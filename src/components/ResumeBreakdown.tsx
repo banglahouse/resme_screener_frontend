@@ -20,8 +20,9 @@ export function ResumeBreakdown({ match }: { match?: MatchInsights }) {
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {sections.map(({ key, label, isList }) => {
           const structured = match?.breakdown?.[key];
+          const experienceHighlight = key === 'experience' ? match?.experienceHighlight : undefined;
           const fallback = fallbackFromInsights(match?.insights, key);
-          const content = structured ?? fallback;
+          const content = structured ?? experienceHighlight ?? fallback;
           const items = Array.isArray(content) ? content : undefined;
           return (
             <div key={key} className="rounded-xl bg-slate-900/60 p-4">

@@ -12,7 +12,7 @@ import { useApplication } from '../hooks/useApplication';
 export function ResumeScreen() {
   const navigate = useNavigate();
   const { applicationId } = useParams();
-  const { state, submitApplication, sendMessage, loadApplicationById } = useApplication();
+  const { state, submitApplication, sendMessage, loadApplicationById, resetApplication } = useApplication();
   const [jobKey, setJobKey] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [candidateUserId, setCandidateUserId] = useState('');
@@ -46,6 +46,17 @@ export function ResumeScreen() {
     setFormError(undefined);
     const application = await submitApplication({ jobKey, jobTitle, candidateUserId, resumeFile, jdFile });
     navigate(`/applications/${application.applicationId}`, { replace: true });
+  };
+
+  const handleReset = () => {
+    resetApplication();
+    setJobKey('');
+    setJobTitle('');
+    setCandidateUserId('');
+    setResumeFile(undefined);
+    setJdFile(undefined);
+    setFormError(undefined);
+    navigate('/', { replace: true });
   };
 
   const application = state.current;
@@ -104,6 +115,14 @@ export function ResumeScreen() {
               className="w-full rounded-2xl bg-lime-400 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-lime-300 disabled:opacity-50"
             >
               {buttonText}
+            </button>
+            <button
+              type="button"
+              onClick={handleReset}
+              disabled={isBusy}
+              className="w-full rounded-2xl border border-slate-800 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:bg-slate-900/40 disabled:opacity-50"
+            >
+              Clear Data & Start New
             </button>
           </form>
 
