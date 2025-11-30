@@ -110,7 +110,6 @@ flowchart LR
 ```
 
 ### State Model
-```mermaid
 classDiagram
   class ApplicationState {
     current?: Application
